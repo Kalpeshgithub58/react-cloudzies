@@ -1,3 +1,4 @@
+import React from "react";
 import ContactUs from "../pages/contact/ContactUs";
 import Home from "../pages/home/Home";
 import Launch from "../pages/launches/Launch";
@@ -22,16 +23,6 @@ export const routes = [
 ];
 
 export const LaunchColums = [
-  "No",
-  "Launched(UTC)",
-  "Location",
-  "Mission",
-  "Orbit",
-  "Launch Status",
-  "Rocket",
-];
-
-export const columns = [
   {
     name: "No",
     selector: (row) => row.No,
@@ -59,5 +50,44 @@ export const columns = [
   {
     name: "Rocket",
     selector: (row) => row.Rocket,
+  },
+];
+
+export const shisColums = [
+  {
+    name: "No",
+    selector: (row) => row.No,
+  },
+  {
+    name: "Ship Image",
+    selector: (row) => (
+      <img
+        src={row["Ship Image"]}
+        style={{
+          width: "80px",
+          height: "80px",
+          borderRadius: "40px",
+          margin: "10px",
+        }}
+        alt=""
+      />
+    ),
+  },
+  {
+    name: "Ship Id",
+    selector: (row) => row["Ship Id"],
+  },
+
+  {
+    name: "Ship Name",
+    selector: (row) => row["Ship Name"],
+  },
+  {
+    name: "Ship Type",
+    selector: (row) => row["Ship Type"],
+  },
+  {
+    name: "Home Port",
+    selector: (row) => row["Home Port"],
   },
 ];
