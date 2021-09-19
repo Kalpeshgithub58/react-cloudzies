@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { HeaderData } from "./header-static";
+import { HeaderData } from "../../static/static";
 import "./Header.scss";
 
 const Header = () => {

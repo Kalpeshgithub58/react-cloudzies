@@ -4,9 +4,11 @@ import Table from "../../common/table/Table";
 import { LaunchColums } from "../../static/static";
 
 const Launch = () => {
+  const [isLoading, setLoading] = useState(false);
   const [LaunchData, setLaunchData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     fetch("https://api.spacexdata.com/v3/launches")
       .then((res) => res.json())
       .then((result) => {
@@ -25,6 +27,7 @@ const Launch = () => {
         });
 
         setLaunchData(array);
+        setLoading(false);
       });
   }, []);
 
@@ -32,9 +35,10 @@ const Launch = () => {
     <>
       <Header />
       <Table
-        title="Space X"
+        title="Launch Details"
         columns={LaunchColums}
         columnsValues={LaunchData}
+        isLoading={isLoading}
       />
     </>
   );

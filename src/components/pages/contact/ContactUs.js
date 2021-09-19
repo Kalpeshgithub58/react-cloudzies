@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import Header from "../../common/header/Header";
 import "./ContactUs.scss";
 
@@ -9,13 +10,31 @@ const initialState = {
 };
 
 const ContactUs = () => {
+  const history = useHistory();
   const [state, setState] = useState(initialState);
+  const [message, setMessage] = useState("");
+  const [display, setDisplay] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisplay(!display);
+    if (state.message) {
+      setMessage(state.message);
+      setTimeout(() => {
+        setDisplay(false);
+        history.push("/");
+      }, 2000);
+    } else {
+      setMessage("Please Enter Your Message");
+      setTimeout(() => {
+        setDisplay(false);
+      }, 2000);
+    }
+
+    setState(initialState);
   };
 
   const handleChange = (event) => {
-    console.log(event.target.name, event.target.value);
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
@@ -23,7 +42,7 @@ const ContactUs = () => {
     <>
       <Header />
       <div>
-        <h1>SpaceX Form</h1>
+        <h1 className="contact-center">SpaceX Form</h1>
         <div className="container">
           <form onSubmit={handleSubmit}>
             <div className="row">
@@ -35,7 +54,7 @@ const ContactUs = () => {
                   type="text"
                   name="firstName"
                   placeholder="Your name"
-                  value={state.firstname}
+                  value={state.firstName}
                   onChange={handleChange}
                 />
               </div>
@@ -69,11 +88,14 @@ const ContactUs = () => {
                 />
               </div>
             </div>
-            <div className="row">
+            <div className="submit-button">
               <input type="submit" value="Submit" />
             </div>
           </form>
         </div>
+      </div>
+      <div id="snackbar" className={display && message ? "show" : null}>
+        {message}
       </div>
     </>
   );

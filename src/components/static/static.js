@@ -3,6 +3,25 @@ import ContactUs from "../pages/contact/ContactUs";
 import Home from "../pages/home/Home";
 import Launch from "../pages/launches/Launch";
 import Ship from "../pages/ships/Ship";
+
+export const HeaderData = {
+  headerTitle: "Space X",
+  headerList: [
+    {
+      name: "Lunches",
+      value: "launches",
+    },
+    {
+      name: "Ships",
+      value: "ships",
+    },
+    {
+      name: "Contact Us",
+      value: "contactus",
+    },
+  ],
+};
+
 export const routes = [
   {
     name: "",
@@ -26,6 +45,7 @@ export const LaunchColums = [
   {
     name: "No",
     selector: (row) => row.No,
+    sortable: true,
   },
   {
     name: "Lunched(UTC)",

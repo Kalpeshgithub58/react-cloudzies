@@ -4,9 +4,11 @@ import Table from "../../common/table/Table";
 import { shisColums } from "../../static/static";
 
 const Ship = () => {
+  const [isLoading, setLoading] = useState(false);
   const [shipsData, setShipsData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     fetch("https://api.spacexdata.com/v3/ships")
       .then((res) => res.json())
       .then((result) => {
@@ -23,13 +25,19 @@ const Ship = () => {
           });
         });
         setShipsData(array);
+        setLoading(false);
       });
   }, []);
 
   return (
     <>
       <Header />
-      <Table title="Space X" columns={shisColums} columnsValues={shipsData} />
+      <Table
+        title="Ship Details"
+        columns={shisColums}
+        columnsValues={shipsData}
+        isLoading={isLoading}
+      />
     </>
   );
 };
